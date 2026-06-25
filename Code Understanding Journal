@@ -1,0 +1,189 @@
+# Code Understanding Journal
+
+## Exercise Part 1: Understanding a Specific Feature
+
+### Feature Chosen
+
+Task Creation and Task Status Updates
+
+### Files Involved
+
+* cli.py
+* task_manager.py
+* models.py
+* storage.py
+
+### Main Components Involved
+
+#### cli.py
+
+Receives commands from the user and passes them to the task manager.
+
+#### task_manager.py
+
+Contains the business logic responsible for creating and updating tasks.
+
+#### models.py
+
+Defines the Task entity and TaskStatus values.
+
+#### storage.py
+
+Stores and retrieves task data.
+
+### Execution Flow
+
+#### Task Creation
+
+1. User enters a command through the CLI.
+2. cli.py processes the command.
+3. task_manager.py creates a new Task object.
+4. Task information is validated.
+5. The task is stored using storage.py.
+6. Confirmation is returned to the user.
+
+#### Task Status Update
+
+1. User selects a task.
+2. cli.py receives the update request.
+3. task_manager.py changes the task status.
+4. Updated task information is saved.
+5. User receives confirmation.
+
+### Data Storage
+
+Task data is persisted through storage.py. This module handles saving and retrieving task information.
+
+### Design Patterns Observed
+
+* Separation of Concerns
+* Layered Architecture
+* Domain Model Pattern
+
+---
+
+# Exercise Part 2: Deepen Understanding Through Guided Questions
+
+### Initial Understanding
+
+Initially, I believed task priorities were simple labels assigned to tasks.
+
+### What I Discovered
+
+Task priorities are implemented using the TaskPriority enumeration:
+
+* LOW
+* MEDIUM
+* HIGH
+* URGENT
+
+These priorities are part of the Task domain model and are used when creating and managing tasks.
+
+### Key Insights
+
+* Priorities are standardized using enums.
+* Priority values help organize and filter tasks.
+* Business logic uses priority information when managing tasks.
+
+### Misconceptions
+
+Initially I assumed priorities were stored as plain text values. After exploring the code, I discovered they are represented as structured enum values.
+
+---
+
+# Exercise Part 3: Mapping Data Flow
+
+### Feature Chosen
+
+Marking a Task as Complete
+
+### Data Flow Diagram
+
+User
+↓
+cli.py
+↓
+task_manager.py
+↓
+models.py (Task Status Updated)
+↓
+storage.py
+↓
+Saved Data
+
+### State Changes
+
+Before Completion:
+
+TaskStatus = TODO
+
+After Completion:
+
+TaskStatus = DONE
+
+### Persistence Process
+
+1. User requests task completion.
+2. CLI receives the command.
+3. Task Manager updates the task status.
+4. Storage saves the modified task.
+5. Updated data is persisted.
+
+### Potential Failure Points
+
+* Invalid task ID
+* Storage failure
+* Invalid status transition
+* Corrupted task data
+
+---
+
+# Exercise Part 4: Reflection and Presentation
+
+### High-Level Architecture
+
+The application follows a layered architecture:
+
+1. User Interface Layer (CLI)
+2. Business Logic Layer
+3. Domain Model Layer
+4. Storage Layer
+
+### Key Features
+
+#### Task Creation
+
+Creates new tasks and stores them.
+
+#### Task Prioritization
+
+Assigns priority levels to tasks.
+
+#### Task Completion
+
+Updates task status and persists changes.
+
+### Interesting Design Pattern
+
+The use of enums for TaskPriority and TaskStatus provides consistency and prevents invalid values.
+
+### Most Challenging Area
+
+Understanding how task data moves through multiple files and layers.
+
+### How AI Helped
+
+AI helped explain:
+
+* File responsibilities
+* Data flow
+* Domain models
+* Application architecture
+
+It also helped validate my understanding and identify relationships between components.
+
+---
+
+# Conclusion
+
+This exercise improved my ability to understand an unfamiliar codebase. By exploring the project structure, tracing feature execution, and mapping data flow, I developed a clearer understanding of how the Task Manager application operates and how AI can assist with code comprehension.
